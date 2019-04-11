@@ -17,6 +17,7 @@ USB_URL = 'http://192.168.13.1'
 
 # The ip of a machine you want to proxy RTP packets to
 REMOTE_HOST = '192.168.0.26'  # TODO: CHANGE ME TO MATCH YOUR SETUP!
+REMOTE_PORT = 55004
 # Run `python gstreamer_viewer.py --format jpeg` on that machine to view the video.
 
 def main():
@@ -26,11 +27,12 @@ def main():
     parser.add_argument('--takeoff', action='store_true')
     parser.add_argument('--land', action='store_true')
     parser.add_argument('--repeat', action='store_true')
+    parser.add_argument('--remote-host', type=str, default=REMOTE_HOST)
     args = parser.parse_args()
 
 
     # Ask for a 360x240 jpeg stream at 7.5fps
-    stream_settings = {'source': 'NATIVE', 'port': 55004}
+    stream_settings = {'source': 'NATIVE', 'port': REMOTE_PORT}
 
     # Acquire pilot access
     while True:
@@ -48,8 +50,8 @@ def main():
 
     # proxy RTP packets to a remote host
     subprocess.Popen(['python', 'gstreamer_proxy.py',
-                      '--remote-host', REMOTE_HOST,
-                      '--remote-port', '55004'])
+                      '--remote-host', args.remote_host,
+                      '--remote-port', str(REMOTE_PORT)])
 
     if args.takeoff:
         print('taking off')
