@@ -108,7 +108,7 @@ def main():
 
     if args.stream == 'h264':
         # H264 is the 720P 15fps h264 encoded stream directly from the camera.
-        stream_settings = {'source': 'h264', 'port': 55004}
+        stream_settings = {'source': 'H264', 'port': 55004}
         # TODO: this stream seems like have client-induced lag
         # Perhaps due to incorrect timestamps.
         stream_file = 'h264_stream.sdp'
