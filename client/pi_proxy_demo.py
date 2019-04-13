@@ -7,6 +7,7 @@ via the Pi's WiFi.
 from __future__ import absolute_import
 from __future__ import print_function
 import argparse
+import subprocess
 import time
 
 from skydio.comms.http_client import HTTPClient
