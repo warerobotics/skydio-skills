@@ -15,6 +15,10 @@
     "display_name": "Orbit Point",
     "explanation": "Double-tap to orbit a location in 3d"
   },
+  "pano.Pano": {
+    "display_name": "Pano",
+    "hint": "Spin in place"
+  },
   "party_mode.PartyMode": {
     "display_name": "Party Mode",
     "explanation": "Look for people to follow for 15 seconds each.",

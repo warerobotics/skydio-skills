@@ -7,28 +7,8 @@ from vehicle.skills.skills.base import Skill
 from vehicle.skills.util import ar
 from vehicle.skills.util import ui
 
-
-# TODO(matt): fix the phone API
-def safe_get_key(phone_api, key):
-    # This queries the variables without mutating it if the key is not set
-    # This appears to be a problem because movement_t complains about None values.
-    return phone_api.variables.vars.get(key)
-
-
-# TODO(matt): add this to the phone API
-def get_tap_ray(api):
-    start = api.phone.ray_tracer._ray_start
-    end = api.phone.ray_tracer._ray_end
-    if start is None or end is None:
-        return None
-    ray = end - start
-    length = np.linalg.norm(ray)
-    return ray / length
-
-
-# NOTE(matt): this just returns the result of a typical double tap and is limited to 7 meters.
-def get_focus_position(api):
-    return api.phone.ray_tracer._focus_position
+# import a patch to the official API
+from .api_patches import get_tap_ray
 
 
 class State(enum.Enum):
@@ -134,6 +114,7 @@ class OrbitPoint(Skill):
         depth = api.obstacle_map.depth_test(start, end)
         if depth is not None and depth < TEST_DEPTH:
             # We've found a voxel, start orbiting.
+            depth += 1.0  # add a meter so we orbit closer to the center of the object
             self.orbit_point = start + (depth * self.tap_ray)
             self.set_state(State.ORBITING)
             return
