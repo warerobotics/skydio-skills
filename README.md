@@ -3,7 +3,7 @@
 With this guide, you'll be able to create new Skills for the Skydio App to add custom behaviors to your R1.
 Skills are python scripts that run onboard R1 and provide basic UI elements inside the app.
 
-![animation](images/roof-inspection.gif)
+![animation](assets/roof-inspection.gif)
 
 
 ## Skillset
