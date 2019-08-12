@@ -33,7 +33,7 @@ class UDPLink(object):
         self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.server_socket.settimeout(0.05)
         self.server_socket.bind(('', local_port))
-        self.remote_address = remote_address
+        self.remote_address = socket.gethostbyname(remote_address[0]), remote_address[1]
 
         # Prep a reuseable rpc
         self.request = custom_comms_pb2.CustomRpcRequest()
